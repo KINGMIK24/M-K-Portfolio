@@ -104,7 +104,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(180deg, rgba(33, 31, 47, 0.72) 0%, rgba(33, 31, 47, 0.88) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.72) 100%);
     z-index: -1;
     pointer-events: none;
   }
