@@ -2,8 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { Mail } from "lucide-react";
+import { useTypewriter } from "@/hooks/use-typewriter";
 
 export function Hero() {
+  const { displayed, done } = useTypewriter("Web & Game Developer", 65, 900);
+
   return (
     <section
       id="home"
@@ -23,11 +26,16 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="h-12"
+          transition={{ duration: 0.4, delay: 0.7 }}
+          className="h-12 flex items-center"
         >
           <h2 className="text-xl md:text-3xl font-light text-primary/90 tracking-wide">
-            Web & Game Developer
+            {displayed}
+            <span
+              className={`inline-block w-[2px] h-[1em] ml-1 align-middle bg-primary/80 ${
+                done ? "animate-pulse" : "animate-[blink_0.7s_step-end_infinite]"
+              }`}
+            />
           </h2>
         </motion.div>
 
