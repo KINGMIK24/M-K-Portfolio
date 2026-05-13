@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "Zgpd160bsfdY3Sxnh3PKY"
+uri = "file://portfolio_single_file.zip"
+type = "unspecified"
+title = "Mukesh Karthik Portfolio — Single HTML File"
