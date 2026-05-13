@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { CustomCursor } from "./components/ui/CustomCursor";
 import { Navbar } from "./components/layout/Navbar";
 import { Hero } from "./components/sections/Hero";
 import { About } from "./components/sections/About";
@@ -17,6 +19,7 @@ const queryClient = new QueryClient();
 function Portfolio() {
   return (
     <div className="relative w-full overflow-hidden">
+      <CustomCursor />
       <Navbar />
       <main>
         <Hero />
@@ -42,10 +45,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
+        <ThemeProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+          <Toaster />
+        </ThemeProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

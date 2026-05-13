@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
   };
 
@@ -18,10 +18,7 @@ export function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/5 px-6 py-3">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
-        <div
-          className="cursor-pointer flex items-center"
-          onClick={() => scrollTo("home")}
-        >
+        <div className="cursor-pointer flex items-center" onClick={() => scrollTo("home")}>
           <img
             src="/lion-logo.png"
             alt="Logo"
@@ -31,7 +28,7 @@ export function Navbar() {
         </div>
 
         <ul className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
+          {navItems.map(item => (
             <li key={item}>
               <button
                 onClick={() => scrollTo(item.toLowerCase())}
@@ -44,14 +41,51 @@ export function Navbar() {
           ))}
         </ul>
 
-        <button
-          className="md:hidden text-foreground/80 hover:text-primary transition-colors duration-300 p-1"
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Toggle menu"
-          data-testid="button-hamburger"
-        >
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="flex items-center gap-3">
+          <motion.button
+            onClick={toggleTheme}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            data-testid="button-theme-toggle"
+            aria-label="Toggle light/dark mode"
+            className="p-2 rounded-full glass-panel text-foreground/70 hover:text-primary transition-colors duration-300"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {theme === "dark" ? (
+                <motion.span
+                  key="sun"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  style={{ display: "block" }}
+                >
+                  <Sun className="w-4 h-4" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="moon"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  style={{ display: "block" }}
+                >
+                  <Moon className="w-4 h-4" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
+
+          <button
+            className="md:hidden text-foreground/80 hover:text-primary transition-colors duration-300 p-1"
+            onClick={() => setMenuOpen(prev => !prev)}
+            aria-label="Toggle menu"
+            data-testid="button-hamburger"
+          >
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
