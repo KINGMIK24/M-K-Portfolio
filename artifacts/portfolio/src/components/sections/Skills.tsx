@@ -11,8 +11,8 @@ export function Skills() {
   return (
     <section id="skills" className="min-h-screen flex items-center justify-center py-24 px-6 relative">
       <div className="max-w-5xl mx-auto w-full z-10">
-        <motion.h2 
-          className="text-3xl md:text-5xl font-bold text-white mb-16 text-center text-glow"
+        <motion.h2
+          className="text-3xl md:text-5xl font-bold gradient-text mb-16 text-center text-glow"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -44,10 +44,10 @@ export function Skills() {
                     cx="64"
                     cy="64"
                     r="56"
-                    className="stroke-primary fill-none drop-shadow-[0_0_8px_rgba(120,255,220,0.5)]"
+                    className="stroke-primary fill-none drop-shadow-[0_0_8px_rgba(145,140,169,0.5)]"
                     strokeWidth="8"
                     strokeLinecap="round"
-                    strokeDasharray="351.86" // 2 * pi * 56
+                    strokeDasharray="351.86"
                     initial={{ strokeDashoffset: 351.86 }}
                     whileInView={{ strokeDashoffset: 351.86 - (351.86 * skill.progress) / 100 }}
                     viewport={{ once: true }}
@@ -55,11 +55,11 @@ export function Skills() {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-2xl font-bold text-white">{skill.progress}%</span>
+                  <span className="text-2xl font-bold text-foreground">{skill.progress}%</span>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">{skill.name}</h3>
-              <p className="text-sm text-primary/80 uppercase tracking-widest">{skill.status}</p>
+              <h3 className="text-xl font-bold text-foreground mb-2">{skill.name}</h3>
+              <p className="text-sm text-muted-foreground uppercase tracking-widest">{skill.status}</p>
             </motion.div>
           ))}
         </div>

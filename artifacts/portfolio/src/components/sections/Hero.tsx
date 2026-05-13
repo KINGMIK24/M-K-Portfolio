@@ -5,8 +5,8 @@ import { Mail } from "lucide-react";
 
 export function Hero() {
   return (
-    <section 
-      id="home" 
+    <section
+      id="home"
       className="min-h-screen flex items-center justify-center relative pt-20 px-6"
     >
       <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center z-10">
@@ -15,11 +15,11 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white title-glow tracking-tighter mb-4">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black gradient-text title-glow tracking-tighter mb-4">
             M Mukesh Karthik
           </h1>
         </motion.div>
-        
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -41,22 +41,44 @@ export function Hero() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="mt-12 flex items-center gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.1 }}
         >
-          <a href="https://github.com/KINGMIK24" target="_blank" rel="noreferrer" className="text-foreground/70 hover:text-primary transition-colors p-3 glass-panel rounded-full hover:scale-110 transform duration-300">
+          <a
+            href="https://github.com/KINGMIK24"
+            target="_blank"
+            rel="noreferrer"
+            className="text-foreground/70 hover:text-primary transition-colors p-3 glass-panel rounded-full hover:scale-110 transform duration-300"
+            data-testid="link-github"
+          >
             <FaGithub className="w-6 h-6" />
           </a>
-          <a href="https://www.linkedin.com/in/mukesh-karthik-m-54b892364" target="_blank" rel="noreferrer" className="text-foreground/70 hover:text-primary transition-colors p-3 glass-panel rounded-full hover:scale-110 transform duration-300">
+          <a
+            href="https://www.linkedin.com/in/mukesh-karthik-m-54b892364"
+            target="_blank"
+            rel="noreferrer"
+            className="text-foreground/70 hover:text-primary transition-colors p-3 glass-panel rounded-full hover:scale-110 transform duration-300"
+            data-testid="link-linkedin"
+          >
             <FaLinkedin className="w-6 h-6" />
           </a>
-          <a href="https://www.instagram.com/mk_king_2410?igsh=MXFxZXEyODlqMnNiNg%3D%3D&utm_source=qr" target="_blank" rel="noreferrer" className="text-foreground/70 hover:text-primary transition-colors p-3 glass-panel rounded-full hover:scale-110 transform duration-300">
+          <a
+            href="https://www.instagram.com/mk_king_2410?igsh=MXFxZXEyODlqMnNiNg%3D%3D&utm_source=qr"
+            target="_blank"
+            rel="noreferrer"
+            className="text-foreground/70 hover:text-primary transition-colors p-3 glass-panel rounded-full hover:scale-110 transform duration-300"
+            data-testid="link-instagram"
+          >
             <FaInstagram className="w-6 h-6" />
           </a>
-          <a href="mailto:Kingmukesh677@gmail.com" className="text-foreground/70 hover:text-primary transition-colors p-3 glass-panel rounded-full hover:scale-110 transform duration-300">
+          <a
+            href="mailto:Kingmukesh677@gmail.com"
+            className="text-foreground/70 hover:text-primary transition-colors p-3 glass-panel rounded-full hover:scale-110 transform duration-300"
+            data-testid="link-email"
+          >
             <Mail className="w-6 h-6" />
           </a>
         </motion.div>
