@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { Mail, Send, CheckCircle, AlertCircle } from "lucide-react";
 
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY ?? "";
+const FORMSPREE_URL = import.meta.env.VITE_FORMSPREE_URL ?? "";
 
 interface FormData {
   name: string;
@@ -54,25 +54,28 @@ export function Contact() {
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
+    if (!FORMSPREE_URL) {
+      setStatus("error");
+      setServerError("Contact form is not configured yet. Please try emailing directly.");
+      return;
+    }
+
     setStatus("sending");
     setServerError("");
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch(FORMSPREE_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `Portfolio Message from ${form.name}`,
-          from_name: form.name,
-          email: form.email,
-          message: form.message,
-        }),
+        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
       });
 
-      const data = await res.json() as { success?: boolean; message?: string };
+      const data = await res.json() as { ok?: boolean; error?: string; errors?: { message: string }[] };
 
-      if (!data.success) throw new Error(data.message ?? "Failed to send.");
+      if (!res.ok) {
+        const msg = data.errors?.[0]?.message ?? data.error ?? "Submission failed.";
+        throw new Error(msg);
+      }
 
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
@@ -285,16 +288,16 @@ export function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <a href="mailto:Kingmukesh677@gmail.com" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-email-contact">
+          <a href="mailto:Kingmukesh677@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
             <Mail className="w-7 h-7" />
           </a>
-          <a href="https://github.com/KINGMIK24" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-github-contact">
+          <a href="https://github.com/KINGMIK24" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
             <FaGithub className="w-7 h-7" />
           </a>
-          <a href="https://www.linkedin.com/in/mukesh-karthik-m-54b892364" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-linkedin-contact">
+          <a href="https://www.linkedin.com/in/mukesh-karthik-m-54b892364" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
             <FaLinkedin className="w-7 h-7" />
           </a>
-          <a href="https://www.instagram.com/mk_king_2410?igsh=MXFxZXEyODlqMnNiNg%3D%3D&utm_source=qr" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-instagram-contact">
+          <a href="https://www.instagram.com/mk_king_2410?igsh=MXFxZXEyODlqMnNiNg%3D%3D&utm_source=qr" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
             <FaInstagram className="w-7 h-7" />
           </a>
         </motion.div>
