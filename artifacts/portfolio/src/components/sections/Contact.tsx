@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { Mail, Send, CheckCircle, AlertCircle } from "lucide-react";
 
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY ?? "";
+
 interface FormData {
   name: string;
   email: string;
@@ -56,17 +58,21 @@ export function Contact() {
     setServerError("");
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Portfolio Message from ${form.name}`,
+          from_name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
       });
 
-      const data = await res.json() as { success?: boolean; error?: string };
+      const data = await res.json() as { success?: boolean; message?: string };
 
-      if (!res.ok || !data.success) {
-        throw new Error(data.error ?? "Something went wrong.");
-      }
+      if (!data.success) throw new Error(data.message ?? "Failed to send.");
 
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
