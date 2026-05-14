@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import { Mail } from "lucide-react";
+import { Mail, Download } from "lucide-react";
 import { useTypewriter } from "@/hooks/use-typewriter";
 
 export function Hero() {
@@ -49,8 +49,26 @@ export function Hero() {
           </p>
         </motion.div>
 
+        {/* Resume download button */}
         <motion.div
-          className="mt-12 flex items-center gap-6"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
+          className="mt-8"
+        >
+          <a
+            href="/resume.html"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary/20 border border-primary/40 text-primary font-medium hover:bg-primary/30 hover:shadow-[0_0_24px_rgba(145,140,169,0.35)] transition-all duration-300 hover:scale-105 transform text-sm md:text-base"
+          >
+            <Download className="w-4 h-4" />
+            View / Download Resume
+          </a>
+        </motion.div>
+
+        <motion.div
+          className="mt-10 flex items-center gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.1 }}

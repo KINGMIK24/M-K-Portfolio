@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M Mukesh Karthik — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f4fb;
+      color: #1e1c2e;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 40px rgba(33,31,47,0.12);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #211F2F 0%, #2e2b42 60%, #3a3655 100%);
+      padding: 44px 48px 36px;
+      position: relative;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #918CA9, transparent);
+    }
+    .header-name {
+      font-size: 36px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .header-title {
+      font-size: 16px;
+      font-weight: 400;
+      color: #918CA9;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: #c8c5d8;
+      text-decoration: none;
+    }
+    .contact-item svg { flex-shrink: 0; opacity: 0.8; }
+    .contact-item:hover { color: #918CA9; }
+
+    /* Body */
+    .body { padding: 40px 48px; display: grid; grid-template-columns: 1fr 280px; gap: 40px; }
+
+    /* Section */
+    .section { margin-bottom: 32px; }
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #918CA9;
+      border-bottom: 1px solid #e8e6f0;
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+    }
+
+    /* Summary */
+    .summary { font-size: 14px; line-height: 1.7; color: #3d3a52; }
+
+    /* Experience / Projects */
+    .entry { margin-bottom: 20px; }
+    .entry-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+    .entry-title { font-size: 15px; font-weight: 600; color: #211F2F; }
+    .entry-badge {
+      font-size: 11px;
+      background: #f0eef8;
+      color: #918CA9;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .entry-subtitle { font-size: 13px; color: #918CA9; margin-bottom: 8px; font-weight: 500; }
+    .entry-desc { font-size: 13.5px; line-height: 1.65; color: #4a4665; }
+    .entry-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .tag {
+      font-size: 11.5px;
+      background: #f0eef8;
+      color: #6b6882;
+      border-radius: 4px;
+      padding: 3px 9px;
+      font-weight: 500;
+    }
+
+    /* Skills sidebar */
+    .skill-group { margin-bottom: 22px; }
+    .skill-group-name { font-size: 13px; font-weight: 600; color: #211F2F; margin-bottom: 10px; }
+    .skill-pill {
+      display: inline-block;
+      background: #f0eef8;
+      color: #4a4665;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 12.5px;
+      margin: 3px 3px 3px 0;
+      font-weight: 500;
+    }
+    .skill-pill.highlight {
+      background: #211F2F;
+      color: #c8c5d8;
+    }
+
+    /* Education */
+    .edu-title { font-size: 15px; font-weight: 600; color: #211F2F; margin-bottom: 2px; }
+    .edu-sub { font-size: 13px; color: #918CA9; font-weight: 500; }
+
+    /* Interests */
+    .interest-list { list-style: none; }
+    .interest-list li {
+      font-size: 13.5px;
+      color: #4a4665;
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .interest-list li::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #918CA9;
+      flex-shrink: 0;
+    }
+
+    /* Print */
+    @media print {
+      body { background: white; padding: 0; }
+      .page { box-shadow: none; border-radius: 0; }
+      .no-print { display: none; }
+    }
+
+    /* Download button */
+    .download-bar {
+      text-align: center;
+      padding: 20px;
+      background: #f5f4fb;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #211F2F;
+      color: #c8c5d8;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 24px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s;
+    }
+    .download-btn:hover { background: #2e2b42; }
+
+    @media (max-width: 700px) {
+      .body { grid-template-columns: 1fr; }
+      .header { padding: 32px 24px 28px; }
+      .body { padding: 28px 24px; }
+      .header-name { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="download-bar no-print">
+  <button class="download-btn" onclick="window.print()">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/>
+    </svg>
+    Save as PDF (Ctrl + P → Save as PDF)
+  </button>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-name">M Mukesh Karthik</div>
+    <div class="header-title">Web &amp; Game Developer</div>
+    <div class="contact-row">
+      <a href="mailto:Kingmukesh677@gmail.com" class="contact-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Kingmukesh677@gmail.com
+      </a>
+      <a href="https://github.com/KINGMIK24" target="_blank" class="contact-item">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        github.com/KINGMIK24
+      </a>
+      <a href="https://www.linkedin.com/in/mukesh-karthik-m-54b892364" target="_blank" class="contact-item">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/mukesh-karthik-m
+      </a>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- LEFT COLUMN -->
+    <div class="left">
+
+      <div class="section">
+        <div class="section-title">Profile</div>
+        <p class="summary">
+          Passionate Web and Game Developer with a strong drive for building interactive, engaging digital experiences. I combine a deep curiosity for technology with hands-on skills in frontend development and game scripting. Always learning, always building — from robust web apps to immersive game worlds.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Projects</div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">QuantX</span>
+            <span class="entry-badge">Web Dev</span>
+          </div>
+          <div class="entry-subtitle">Frontend Web Application</div>
+          <p class="entry-desc">
+            A dynamic, responsive web application built with modern frontend technologies. Focused on clean UI design, performance optimization, and intuitive user experience.
+          </p>
+          <div class="entry-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">React</span>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Godot Game Project</span>
+            <span class="entry-badge">Game Dev</span>
+          </div>
+          <div class="entry-subtitle">2D / 3D Game — In Development</div>
+          <p class="entry-desc">
+            An original game built from the ground up using the Godot Engine with GDScript. Designing game mechanics, levels, and interactive systems independently.
+          </p>
+          <div class="entry-tags">
+            <span class="tag">Godot Engine</span>
+            <span class="tag">GDScript</span>
+            <span class="tag">Game Design</span>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Personal Portfolio Website</span>
+            <span class="entry-badge">Web Dev</span>
+          </div>
+          <div class="entry-subtitle">React + Vite — Live</div>
+          <p class="entry-desc">
+            Designed and built a full-stack personal portfolio featuring dark/light mode, animated typing effects, project filtering, a live contact form with email integration, and a custom animated cursor.
+          </p>
+          <div class="entry-tags">
+            <span class="tag">React</span>
+            <span class="tag">Vite</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">Framer Motion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Education</div>
+        <div class="edu-title">Bachelor of Engineering / Technology</div>
+        <div class="edu-sub">Computer Science — In Progress</div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN (Sidebar) -->
+    <div class="right">
+
+      <div class="section">
+        <div class="section-title">Technical Skills</div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Web Development</div>
+          <span class="skill-pill highlight">HTML5</span>
+          <span class="skill-pill highlight">CSS3</span>
+          <span class="skill-pill highlight">JavaScript</span>
+          <span class="skill-pill">React</span>
+          <span class="skill-pill">Vite</span>
+          <span class="skill-pill">Tailwind CSS</span>
+          <span class="skill-pill">Responsive Design</span>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Game Development</div>
+          <span class="skill-pill highlight">Godot Engine</span>
+          <span class="skill-pill highlight">GDScript</span>
+          <span class="skill-pill">Game Mechanics</span>
+          <span class="skill-pill">Level Design</span>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Languages</div>
+          <span class="skill-pill highlight">JavaScript</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">GDScript</span>
+          <span class="skill-pill">TypeScript</span>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">Tools &amp; Platforms</div>
+          <span class="skill-pill">Git &amp; GitHub</span>
+          <span class="skill-pill">VS Code</span>
+          <span class="skill-pill">Node.js</span>
+          <span class="skill-pill">Figma</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Currently Learning</div>
+        <ul class="interest-list">
+          <li>Python (Scripting &amp; Automation)</li>
+          <li>Godot Engine &amp; GDScript</li>
+          <li>Advanced React Patterns</li>
+          <li>3D Game Development</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Interests</div>
+        <ul class="interest-list">
+          <li>Game Design &amp; Development</li>
+          <li>UI/UX &amp; Web Animation</li>
+          <li>Open Source Contribution</li>
+          <li>Technology &amp; Innovation</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
