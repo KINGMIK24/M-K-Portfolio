@@ -29,15 +29,14 @@ export function Contact() {
   const [form, setForm] = useState<FormData>({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [serverError, setServerError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     const updated = { ...form, [name]: value };
     setForm(updated);
-    if (touched[name]) {
-      setErrors(validate(updated));
-    }
+    if (touched[name]) setErrors(validate(updated));
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -46,20 +45,37 @@ export function Contact() {
     setErrors(validate(form));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const allTouched = { name: true, email: true, message: true };
-    setTouched(allTouched);
+    setTouched({ name: true, email: true, message: true });
     const errs = validate(form);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
+
     setStatus("sending");
-    setTimeout(() => {
+    setServerError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json() as { success?: boolean; error?: string };
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error ?? "Something went wrong.");
+      }
+
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
       setTouched({});
       setErrors({});
-    }, 1400);
+    } catch (err) {
+      setStatus("error");
+      setServerError(err instanceof Error ? err.message : "Failed to send. Please try again.");
+    }
   };
 
   const inputBase =
@@ -214,6 +230,19 @@ export function Contact() {
                     )}
                   </AnimatePresence>
                 </div>
+
+                <AnimatePresence>
+                  {status === "error" && serverError && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="flex items-center gap-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 px-4 py-3 rounded-xl"
+                    >
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" /> {serverError}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
 
                 <motion.button
                   type="submit"
